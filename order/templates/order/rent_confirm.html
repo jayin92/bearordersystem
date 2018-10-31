@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+{% endfor %}
+{% endif %}
+
+{% if borrow_list|length >= 1 %}
+借閱&amp;歸還書籍如下：
+<table class="table-hover" style="width:100%">
+	<tr>
+		<th>書名</th>
+		<th>作者</th>
+		<th>出版日期</th>
+		<th>ISBN</th>
+	</tr>
+	{% for book in borrow_list %}
+	{% if book.book_borrowid == user.profile.school_id %}
+	<tr>
+		<td><font color="green">{{book.book_title}}</font></td>
+		<td><font color="green">{{book.book_author}}</font></td>
+		<td><font color="green">{{book.book_pubtime}}</font></td>
+		<td><font color="green">{{book.book_isbn}}</font></td>
+	</tr>
+	{% else %}
+	<tr>
+		<td>{{book.book_title}}</td>
+		<td>{{book.book_author}}</td>
+		<td>{{book.book_pubtime}}</td>
+		<td>{{book.book_isbn}}</td>
+	</tr>
+	{% endif %}
+	{% endfor %}
+</table>
+
+{% endif %}
+{% endblock content %}

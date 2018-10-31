@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<h2>{{ book.book_title }}</h2>
+
+	作者: {{book.book_author}}<br>
+	出版時間: {{book.book_pubtime}}<br>
+	 {% if book.book_isbn=='1' %}
+	 	無
+	 {% else %}
+	 	{{book.book_isbn}}
+	 {% endif %}
+	 <br>
+
+
+{% if book.book_borrowid %}
+	借出狀況: {{book.book_borrowid}}
+{% else %}
+	借出狀況: 未借出
+{% endif %}
+{% endblock content %}

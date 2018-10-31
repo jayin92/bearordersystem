@@ -1,0 +1,27 @@
+{% extends 'main/base.html'%}
+{% block content %}
+<h2>登入</h2>
+	{% if messages %}
+	{% for message in messages %}
+	  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+	    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	      <span aria-hidden="true">&times;</span>
+	    </button>
+	    {{ message }}
+	  </div>
+		{% endfor %}
+		{% endif %}
+	<form method="post">
+		{% csrf_token %}
+		{% for field in form %}
+		<p>
+			<div class="fieldWrapper">
+					{{ field.errors }}
+					{{ field.label_tag }}<br>
+					{{ field }}
+			</div>
+		</p>
+	{% endfor %}
+	<input type="submit" class="btn btn-primary" value="登入">
+</form>
+{% endblock content %}
